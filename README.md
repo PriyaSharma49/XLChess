@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Play against a from-scratch AI engine across seven difficulty levels, track your stats, solve tactical puzzles, and enjoy a glassmorphism-styled interface that runs smoothly on desktop, tablet, and mobile.
+  Play against a from-scratch AI engine across seven difficulty levels and enjoy a glassmorphism-styled interface that runs smoothly on desktop, tablet, and mobile.
 </p>
 
 <p align="center">
@@ -17,14 +17,13 @@
   <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black" alt="React"/>
   <img src="https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/>
   <img src="https://img.shields.io/badge/chess.js-1.4-8B4513" alt="chess.js"/>
-  <img src="https://img.shields.io/badge/license-unspecified-lightgrey" alt="License"/>
 </p>
 
 ---
 
 ## ✨ Overview
 
-XLChess is a full-featured, single-player chess web app. It pairs a custom-built AI opponent — with search depth, quiescence search, and iterative deepening at the higher levels — with a polished, animated board UI, tactical puzzles, opening recognition, and persistent game statistics.
+XLChess is a full-featured, single-player chess web app. It pairs a custom-built AI opponent — with search depth, quiescence search, and iterative deepening at the higher levels — with a polished, animated board UI.
 
 ---
 
@@ -84,8 +83,7 @@ xlchess/
 │   └── ui/                 # Reusable shadcn/ui-style components
 ├── hooks/                  # Custom React hooks
 ├── lib/
-│   ├── chess/              # AI engine, openings, puzzles, themes, sounds
-│   ├── xlchess/             # Stats tracking
+│   ├── chess/              # AI engine, themes, sounds
 │   └── utils.js
 ├── public/                 # Static assets (logo, images)
 ├── package.json
