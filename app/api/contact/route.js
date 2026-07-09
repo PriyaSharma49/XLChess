@@ -1,21 +1,52 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req) {
   try {
+    // Check environment variables first
+    if (!process.env.RESEND_API_KEY) {
+      return Response.json(
+        {
+          ok: false,
+          error: "RESEND_API_KEY is not configured.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    if (!process.env.CONTACT_EMAIL) {
+      return Response.json(
+        {
+          ok: false,
+          error: "CONTACT_EMAIL is not configured.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    // Create Resend client AFTER checking the key
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const { email, message } = await req.json();
 
     // Validation
     if (!email || !message) {
       return Response.json(
-        { ok: false, error: "Email and message are required." },
-        { status: 400 }
+        {
+          ok: false,
+          error: "Email and message are required.",
+        },
+        {
+          status: 400,
+        }
       );
     }
 
     await resend.emails.send({
-      from: "XLCHESS <onboarding@resend.dev>", // Change after verifying your domain
+      from: "XLCHESS <onboarding@resend.dev>",
       to: process.env.CONTACT_EMAIL,
       replyTo: email,
       subject: `New XLCHESS Contact from ${email}`,
