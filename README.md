@@ -1,351 +1,211 @@
-# ♟️ XLChess
+<p align="center">
+  <img src="public/xlchess-logo.png" alt="XLChess Logo" width="120"/>
+</p>
+
+<h1 align="center">♟️ XLChess</h1>
 
 <p align="center">
-  <img src="public/logo.png" alt="XLChess Logo" width="140"/>
+  <strong>A modern, AI-powered chess platform built with Next.js, React, Tailwind CSS, and chess.js.</strong>
 </p>
 
 <p align="center">
-  <strong>A modern AI-powered Chess Platform built with Next.js, React, Tailwind CSS, and Chess.js.</strong>
+  Play against a from-scratch AI engine across seven difficulty levels, track your stats, solve tactical puzzles, and enjoy a glassmorphism-styled interface that runs smoothly on desktop, tablet, and mobile.
 </p>
 
 <p align="center">
-  Play against AI with multiple difficulty levels, enjoy a beautiful modern interface, use chess timers, export/import PGN, and experience smooth gameplay across desktop, tablet, and mobile devices.
+  <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black" alt="React"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?logo=tailwind-css&logoColor=white" alt="Tailwind CSS"/>
+  <img src="https://img.shields.io/badge/chess.js-1.4-8B4513" alt="chess.js"/>
+  <img src="https://img.shields.io/badge/license-unspecified-lightgrey" alt="License"/>
 </p>
 
 ---
 
-## ✨ Features
+## ✨ Overview
 
-### 🎮 Gameplay
-- ♟️ Play against AI
-- 🧠 Multiple AI difficulty levels
-  - Beginner
-  - Easy
-  - Medium
-  - Hard
-  - Expert
-- ✅ Legal move validation
-- 👑 Pawn Promotion
-- 🏰 Castling
-- ⚡ En Passant
-- 🚨 Check Detection
-- 🏆 Checkmate Detection
-- 🤝 Draw Detection
-- 🔄 Stalemate Detection
-- 📜 Threefold Repetition
-- ⏳ Fifty-Move Rule
-- ♟️ Insufficient Material Detection
+XLChess is a full-featured, single-player chess web app. It pairs a custom-built AI opponent — with search depth, quiescence search, and iterative deepening at the higher levels — with a polished, animated board UI, tactical puzzles, opening recognition, and persistent game statistics.
 
 ---
 
-## 🤖 AI Features
+## 🎮 Features
 
-- Smart AI move generation
-- Adjustable AI difficulty
-- AI Thinking Indicator
-- Smooth AI move animations
-- Configurable AI response time
+### Gameplay
+- Full legal move validation via `chess.js` (castling, en passant, pawn promotion)
+- Check, checkmate, stalemate, threefold repetition, fifty-move rule, and insufficient-material detection
+- Undo move, reset game, and flip board
+- Configurable time controls (Bullet, Blitz, and more) with automatic turn switching and timeout detection
 
----
+### AI Opponent
+- Seven difficulty levels: **Beginner, Easy, Intermediate, Advanced, Expert, Master, Grandmaster**
+- Higher levels use deeper search, quiescence search, and a transposition table for stronger play
+- Animated "thinking" indicator and smooth move animations
 
-## ⏱ Chess Clock
+### Puzzles & Openings
+- Built-in tactical puzzle set with rated positions (e.g. mate-in-1s and famous tactics)
+- Live opening detection that matches your move sequence against a curated list of named openings with ECO codes (Ruy López, Sicilian Najdorf, Sicilian Dragon, French Defense, and more)
 
-- Player timers
-- Countdown clock
-- Automatic turn switching
-- Timeout detection
-- Live timer updates
+### Game Data & Persistence
+- Move history and captured-pieces tracking
+- PGN copy, export, and import
+- Save and load games locally
+- Personal stats dashboard: games played, wins/losses/draws, checkmates, fastest win, puzzles solved, favorite openings, and best difficulty beaten
 
----
+### Interface
+- Multiple board themes (e.g. Classic Wood, Ivory Marble, and more)
+- Optional sound effects for moves, captures, and checks
+- Glassmorphism design with Framer Motion animations
+- Fully responsive layout for desktop, tablet, and mobile
 
-## 📜 Game Controls
-
-- Undo Move
-- Reset Game
-- Flip Board
-- Move History
-- Copy PGN
-- Export PGN
-- Import PGN
-- Save Game
-- Load Saved Game
-
----
-
-## 🎨 User Interface
-
-- Modern Glassmorphism Design
-- Beautiful Landing Page
-- Smooth Animations
-- Responsive Layout
-- Mobile Friendly
-- Tablet Optimized
-- Desktop Optimized
-- Clean Navigation
-- Premium UI Experience
+### Contact
+- In-app contact form that sends messages via the Resend email API
 
 ---
 
-## 📊 Game Information
+## 🚀 Tech Stack
 
-- Current Turn Indicator
-- Captured Pieces
-- Move History
-- Check Notification
-- Winner Announcement
-- Game Status Display
-
----
-
-# 🚀 Tech Stack
-
-## Frontend
-
-- Next.js
-- React
-- JavaScript (ES6+)
-- Tailwind CSS
-- Framer Motion
-
-## Chess Libraries
-
-- chess.js
-- react-chessboard
-
-## Icons
-
-- Lucide React
-
-## Development Tools
-
-- ESLint
-- npm
-
-## Deployment
-
-- Vercel
+| Layer | Technologies |
+|---|---|
+| **Framework** | Next.js 15 (App Router), React 18 |
+| **Styling** | Tailwind CSS, tailwindcss-animate, Framer Motion |
+| **UI Components** | Radix UI primitives, shadcn/ui-style components, Lucide React icons |
+| **Chess Logic** | chess.js |
+| **Forms & Validation** | React Hook Form, Zod |
+| **Data & State** | TanStack Query, TanStack Table, SWR |
+| **Charts** | Recharts |
+| **Email** | Resend |
+| **Utilities** | date-fns, dayjs, lodash, uuid, clsx |
+| **Tooling** | ESLint, npm / Yarn |
+| **Deployment** | Vercel |
 
 ---
 
-# 📁 Folder Structure
+## 📁 Project Structure
 
 ```
-XLChess/
-│
-├── app/
+xlchess/
+├── app/                    # Next.js App Router
+│   ├── api/                # API routes (contact form, etc.)
+│   ├── layout.js
+│   ├── page.js
+│   └── providers.js
 ├── components/
-├── hooks/
+│   ├── chess/              # Board, gameplay, landing-page sections
+│   └── ui/                 # Reusable shadcn/ui-style components
+├── hooks/                  # Custom React hooks
 ├── lib/
-├── public/
-├── styles/
-├── utils/
+│   ├── chess/              # AI engine, openings, puzzles, themes, sounds
+│   ├── xlchess/             # Stats tracking
+│   └── utils.js
+├── public/                 # Static assets (logo, images)
 ├── package.json
-├── package-lock.json
 ├── next.config.js
+├── tailwind.config.js
 └── README.md
 ```
 
 ---
 
-# ⚙️ Installation
+## ⚙️ Getting Started
 
-## Clone the repository
+### Prerequisites
+- Node.js 18+
+- npm or Yarn
 
-```bash
-git clone https://github.com/ProyaSharma49/XLChess.git
-```
-
-## Navigate into the project
+### 1. Clone the repository
 
 ```bash
-cd XLChess
+git clone https://github.com/PriyaSharma49/XLChess.git
+cd XLChess/xlchess
 ```
 
-## Install dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-## Start the development server
+### 3. Configure environment variables
+
+Create a `.env.local` file in the project root:
+
+```env
+RESEND_API_KEY=your_resend_api_key
+CONTACT_EMAIL=your_contact_email
+```
+
+> ⚠️ **Note:** these values are required for the contact form to send email via Resend. Never commit real API keys to the repository — keep `.env`/`.env.local` in `.gitignore` and share only a `.env.example` with placeholder values.
+
+### 4. Run the development server
 
 ```bash
 npm run dev
 ```
 
-Open your browser and visit:
-
-```
-http://localhost:3000
-```
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-# 📦 Available Scripts
+## 📦 Available Scripts
 
-Run development server
-
-```bash
-npm run dev
-```
-
-Create production build
-
-```bash
-npm run build
-```
-
-Start production server
-
-```bash
-npm run start
-```
-
-Run ESLint
-
-```bash
-npm run lint
-```
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Create an optimized production build |
+| `npm run start` | Start the production server |
 
 ---
 
-# ♟ Supported Chess Rules
+## 🌟 Roadmap
 
-✔ Standard Chess Rules
-
-✔ Check
-
-✔ Checkmate
-
-✔ Stalemate
-
-✔ Draw
-
-✔ Threefold Repetition
-
-✔ Fifty-Move Rule
-
-✔ Insufficient Material
-
-✔ Castling
-
-✔ En Passant
-
-✔ Pawn Promotion
+- 🌍 Online multiplayer
+- 👤 User authentication
+- 📈 Global leaderboard
+- 🤖 Stronger Stockfish-powered AI option
+- 📊 Post-game analysis
+- 🏅 Tournament mode
+- ☁️ Cloud save for cross-device games
 
 ---
 
-# 📱 Responsive Design
-
-Optimized for:
-
-- 💻 Desktop
-- 📱 Mobile
-- 📲 Tablet
-
----
-
-# 📸 Screenshots
-
-## Landing Page
-
-```
-Add Screenshot Here
-```
-
-## Game Board
-
-```
-Add Screenshot Here
-```
-
-## Mobile View
-
-```
-Add Screenshot Here
-```
-
----
-
-# 🌟 Upcoming Features
-
-- 🌍 Online Multiplayer
-- 👤 User Authentication
-- 📈 Global Leaderboard
-- 🧩 Chess Puzzle Mode
-- 📚 Opening Explorer
-- 🤖 Stronger Stockfish AI
-- 📊 Post-game Analysis
-- 🎨 Multiple Board Themes
-- 🔊 Sound Effects
-- 💾 Cloud Save
-- 🏅 Tournament Mode
-- 📜 Match History
-
----
-
-# 🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome!
 
 1. Fork the repository
-
-2. Create a new branch
-
-```bash
-git checkout -b feature-name
-```
-
+2. Create a feature branch
+   ```bash
+   git checkout -b feature-name
+   ```
 3. Commit your changes
-
-```bash
-git commit -m "Added new feature"
-```
-
-4. Push your branch
-
-```bash
-git push origin feature-name
-```
-
+   ```bash
+   git commit -m "Add: your feature description"
+   ```
+4. Push the branch
+   ```bash
+   git push origin feature-name
+   ```
 5. Open a Pull Request
 
 ---
 
-# 👩‍💻 Developer
+## 👩‍💻 Developer
 
 **Priya Sharma**
+Frontend / Software Developer
 
-Frontend Developer | Software Developer
-
-GitHub: https://github.com/PriyaSharma49
-
----
-
-# 💙 Acknowledgements
-
-This project uses the following amazing open-source libraries:
-
-- Next.js
-- React
-- Tailwind CSS
-- chess.js
-- react-chessboard
-- Framer Motion
-- Lucide React
-
-Special thanks to the open-source community for providing incredible tools that made this project possible.
+[GitHub](https://github.com/PriyaSharma49) · [XLChess Repository](https://github.com/PriyaSharma49/XLChess)
 
 ---
 
-# ⭐ Support
+## 💙 Acknowledgements
 
-If you enjoyed this project, consider giving it a ⭐ on GitHub.
-
-It helps others discover the project and motivates future improvements.
+Built with these open-source libraries: Next.js, React, Tailwind CSS, chess.js, Framer Motion, Radix UI, Lucide React, and Resend.
 
 ---
 
-<p align="center">
-  Made with ❤️ by <strong>Priya Sharma</strong>
-</p>
+## ⭐ Support
+
+If you found this project useful or interesting, consider giving it a star on GitHub — it helps others discover it.
+
+<p align="center">Made with ❤️ by <strong>Priya Sharma</strong></p>
