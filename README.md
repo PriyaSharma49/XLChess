@@ -30,24 +30,24 @@ XLChess is a full-featured, single-player chess web app. It pairs a custom-built
 ## 🎮 Features
 
 ### Gameplay
-- Full legal move validation via `chess.js` (castling, en passant, pawn promotion)
-- Check, checkmate, stalemate, threefold repetition, fifty-move rule, and insufficient-material detection
-- Undo move, reset game, and flip board
-- Configurable time controls (Bullet, Blitz, and more) with automatic turn switching and timeout detection
+- Full legal move validation via `chess.js` — castling, en passant, pawn promotion
+- Check, checkmate, stalemate, and draw detection
+- Undo move, reset game, flip board
+- Configurable time controls with automatic turn switching
 
 ### AI Opponent
 - Seven difficulty levels: **Beginner, Easy, Intermediate, Advanced, Expert, Master, Grandmaster**
-- Higher levels use deeper search, quiescence search, and a transposition table for stronger play
-- Animated "thinking" indicator and smooth move animations
+- Stronger play at higher levels via deeper search and a transposition table
+- Animated "thinking" indicator and move animations
 
 ### Interface
-- Multiple board themes (e.g. Classic Wood, Ivory Marble, and more)
-- Optional sound effects for moves, captures, and checks
+- Multiple board themes
+- Optional sound effects
 - Glassmorphism design with Framer Motion animations
-- Fully responsive layout for desktop, tablet, and mobile
+- Fully responsive across desktop, tablet, and mobile
 
 ### Contact
-- In-app contact form that sends messages via the Resend email API
+- In-app contact form powered by the Resend email API
 
 ---
 
