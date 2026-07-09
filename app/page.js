@@ -312,45 +312,57 @@ function Openings() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md">
-      <div className="relative max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+    <footer className="border-t border-white/10 bg-black/20 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
 
-        {/* Left */}
-        <div className="flex items-center gap-3">
-          <KnightLogo size={36} />
-          <span className="font-grotesk text-xl font-black text-white">
-            XLCHESS
-          </span>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+
+          {/* Left */}
+          <div className="flex items-center gap-2">
+            <KnightLogo size={30} />
+            <span className="font-grotesk text-base sm:text-lg font-black text-white">
+              XLCHESS
+            </span>
+          </div>
+
+          {/* Center */}
+          <div className="text-xs text-white/40 text-center order-3 sm:order-none">
+            © {new Date().getFullYear()} XLChess. All rights reserved.
+          </div>
+
+          {/* Right */}
+          <div className="flex items-center gap-3 text-xs sm:text-sm">
+            <a
+              href="#play"
+              className="text-white/60 hover:text-violet-300 transition"
+            >
+              Play
+            </a>
+
+            <span className="text-white/20">|</span>
+
+            <a
+              href="#puzzles"
+              className="text-white/60 hover:text-violet-300 transition"
+            >
+              Puzzles
+            </a>
+
+            <span className="text-white/20">|</span>
+
+            <a
+              href="#contact"
+              className="text-white/60 hover:text-violet-300 transition"
+            >
+              Contact
+            </a>
+          </div>
         </div>
-
-        {/* Center */}
-        <div className="absolute left-1/2 -translate-x-1/2 text-sm text-white/50">
-          © 2026 XLChess.
-        </div>
-
-        {/* Right */}
-        <div className="flex items-center gap-4 text-sm">
-          <a
-            href="#play"
-            className="text-white/70 hover:text-violet-300 transition"
-          >
-            Play
-          </a>
-
-          <span className="text-white/30">|</span>
-
-          <a
-            href="#puzzles"
-            className="text-white/70 hover:text-violet-300 transition"
-          >
-            Puzzles
-          </a>
-        </div>
-
       </div>
     </footer>
   );
 }
+
 
 function App() {
   return (
