@@ -196,4 +196,4 @@ Built with these open-source libraries: Next.js, React, Tailwind CSS, chess.js, 
 
 If you found this project useful or interesting, consider giving it a star on GitHub — it helps others discover it.
 
-<p align="center">Made with ❤️ by <strong>Priya Sharma</strong></p>
+<p align="center">Built by <strong>Priya Sharma</strong></p>
