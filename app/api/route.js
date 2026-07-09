@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { getDb } from '@/lib/mongo';
 import { v4 as uuidv4 } from 'uuid';
 import { Resend } from 'resend';
 
