@@ -9,14 +9,14 @@
 </p>
 
 <p align="center">
-  Play against a from-scratch AI engine across seven difficulty levels and enjoy a glassmorphism-styled interface that runs smoothly on desktop, tablet, and mobile.
+  Play against a from scratch AI engine across seven difficulty levels and enjoy a glassmorphism-styled interface that runs smoothly on desktop, tablet, and mobile.
 </p>
 
 ---
 
-A chess platform built with Next.js and React — play against an AI opponent across seven difficulty levels, or pass-and-play locally with a friend. Built as the hero-section deliverable for a technical assessment, extended into a fuller playable experience.
+A chess platform built with Next.js and React, play against an AI opponent across seven difficulty levels, or pass-and-play locally with a friend. Built as the hero-section deliverable for a technical assessment, extended into a fuller playable experience.
 
-**Live demo:** [xl-chess-nine.vercel.app](https://xl-chess-nine.vercel.app/) *(update this link once redeployed — currently returning a 404)*
+**Live demo:** [xl-chess-nine.vercel.app](https://xl-chess-nine.vercel.app/) 
 **Repository:** [github.com/PriyaSharma49/XLChess](https://github.com/PriyaSharma49/XLChess)
 
 ---
