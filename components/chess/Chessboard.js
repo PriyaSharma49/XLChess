@@ -7,6 +7,12 @@ import { BOARD_THEMES } from '@/lib/chess/themes';
 
 const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 const DRAG_THRESHOLD = 6; // px of movement before a pointerdown counts as a drag instead of a click
+const PROMO_PIECES = [
+  { code: 'q', label: 'Queen' },
+  { code: 'r', label: 'Rook' },
+  { code: 'b', label: 'Bishop' },
+  { code: 'n', label: 'Knight' },
+];
 
 function squareName(row, col, orientation) {
   const f = orientation === 'white' ? col : 7 - col;
@@ -31,14 +37,18 @@ export default function Chessboard({
   const [legalTargets, setLegalTargets] = useState([]);
   const [dragging, setDragging] = useState(null);
   const [hoverSquare, setHoverSquare] = useState(null);
+  // Pending pawn promotion: { from, to, color } — set instead of moving
+  // immediately whenever a move would promote, so the player can choose
+  // which piece to promote to rather than always getting a queen.
+  const [pendingPromotion, setPendingPromotion] = useState(null);
 
   // Keep latest interactive state/selection available inside the native
   // (non-React) touch listener below without needing to re-subscribe it
   // on every render.
   const stateRef = useRef({});
   useEffect(() => {
-    stateRef.current = { interactive, selected, legalTargets, orientation };
-  }, [interactive, selected, legalTargets, orientation]);
+    stateRef.current = { interactive, selected, legalTargets, orientation, pendingPromotion };
+  }, [interactive, selected, legalTargets, orientation, pendingPromotion]);
 
   useEffect(() => {
     const update = () => {
@@ -94,12 +104,22 @@ export default function Chessboard({
     setLegalTargets(moves.map((m) => m.to));
   };
 
+  // Returns true if the from->to move exists and is a promotion (so the
+  // caller can decide whether to open the picker instead of moving).
   const attemptMove = (from, to) => {
     const moves = chess.moves({ square: from, verbose: true });
     const found = moves.find((m) => m.to === to);
     if (!found) return false;
-    const move = found.promotion ? { from, to, promotion: 'q' } : { from, to };
-    const result = chess.move(move);
+
+    if (found.promotion) {
+      // Don't play the move yet — ask which piece to promote to first.
+      setPendingPromotion({ from, to, color: found.color });
+      setSelected(null);
+      setLegalTargets([]);
+      return true;
+    }
+
+    const result = chess.move({ from, to });
     if (result) {
       onMove && onMove(result);
       setSelected(null);
@@ -107,6 +127,22 @@ export default function Chessboard({
       return true;
     }
     return false;
+  };
+
+  const resolvePromotion = (promoCode) => {
+    if (!pendingPromotion) return;
+    const { from, to } = pendingPromotion;
+    const result = chess.move({ from, to, promotion: promoCode });
+    if (result) {
+      onMove && onMove(result);
+    }
+    setPendingPromotion(null);
+  };
+
+  const cancelPromotion = () => {
+    // No chess.move() was ever called for a pending promotion, so the
+    // board/game state is untouched — just close the picker.
+    setPendingPromotion(null);
   };
 
   const squareFromPoint = useCallback((clientX, clientY) => {
@@ -124,6 +160,7 @@ export default function Chessboard({
   // mouse (React onMouseDown) and touch (native listener below).
   const handlePointerDown = (clientX, clientY, square) => {
     if (!stateRef.current.interactive) return false;
+    if (stateRef.current.pendingPromotion) return false; // picker is open, ignore board clicks
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const y = clientY - rect.top;
@@ -172,6 +209,7 @@ export default function Chessboard({
 
     const onTouchStart = (e) => {
       if (!stateRef.current.interactive) return;
+      if (stateRef.current.pendingPromotion) return;
       const t = e.touches[0];
       const hit = squareFromPoint(t.clientX, t.clientY);
       if (!hit) return;
@@ -351,6 +389,49 @@ export default function Chessboard({
             </div>
           );
         })()}
+
+        {/* Promotion picker — appears whenever a pawn move reaches the last rank */}
+        {pendingPromotion && (
+          <div
+            className="absolute inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            onClick={cancelPromotion}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              className="rounded-2xl bg-gradient-to-br from-neutral-900/95 to-neutral-950/95 border border-white/15 p-4 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="text-white text-xs font-semibold uppercase tracking-wider text-center mb-3">
+                Promote pawn to
+              </div>
+              <div className="flex gap-2">
+                {PROMO_PIECES.map(({ code, label }) => (
+                  <button
+                    key={code}
+                    onClick={() => resolvePromotion(code)}
+                    title={label}
+                    className="flex flex-col items-center gap-1 w-16 rounded-xl bg-white/5 border border-white/15 hover:bg-white/15 hover:border-emerald-400/60 transition py-2 px-1"
+                    style={{ background: pendingPromotion.color === 'w' ? undefined : undefined }}
+                  >
+                    <span
+                      className="flex items-center justify-center rounded-lg"
+                      style={{ width: 44, height: 44, background: pendingPromotion.color === 'w' ? theme.light : theme.dark }}
+                    >
+                      <ChessPiece
+                        pieceKey={pendingPromotion.color + code.toUpperCase()}
+                        size={38}
+                        whiteColor={theme.whitePiece}
+                        blackColor={theme.blackPiece}
+                      />
+                    </span>
+                    <span className="text-[10px] text-white/70 font-medium">{label}</span>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </div>
   );
