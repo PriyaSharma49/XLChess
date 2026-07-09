@@ -41,16 +41,6 @@ XLChess is a full-featured, single-player chess web app. It pairs a custom-built
 - Higher levels use deeper search, quiescence search, and a transposition table for stronger play
 - Animated "thinking" indicator and smooth move animations
 
-### Puzzles & Openings
-- Built-in tactical puzzle set with rated positions (e.g. mate-in-1s and famous tactics)
-- Live opening detection that matches your move sequence against a curated list of named openings with ECO codes (Ruy López, Sicilian Najdorf, Sicilian Dragon, French Defense, and more)
-
-### Game Data & Persistence
-- Move history and captured-pieces tracking
-- PGN copy, export, and import
-- Save and load games locally
-- Personal stats dashboard: games played, wins/losses/draws, checkmates, fastest win, puzzles solved, favorite openings, and best difficulty beaten
-
 ### Interface
 - Multiple board themes (e.g. Classic Wood, Ivory Marble, and more)
 - Optional sound effects for moves, captures, and checks
