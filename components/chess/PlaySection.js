@@ -449,6 +449,24 @@ export default function PlaySection() {
               </AnimatePresence>
             </div>
 
+            {/* Game Actions - shown right below board on mobile */}
+            <SectionCard label="Game Actions" className="lg:hidden">
+              <div className="grid grid-cols-3 gap-2 mb-2">
+                <Button variant="outline" size="sm" onClick={showHint} disabled={!canHint} className="flex-col h-16 gap-1 border-sky-500/30 bg-sky-500/10 text-sky-200 hover:bg-sky-500/20">
+                  <Lightbulb className="w-4 h-4" /> <span className="text-[11px]">Hint</span>
+                </Button>
+                <Button variant="outline" size="sm" onClick={undo} disabled={history.length === 0 || !!gameEnded} className="flex-col h-16 gap-1 border-white/15 bg-white/5 text-white hover:bg-white/10">
+                  <Undo2 className="w-4 h-4" /> <span className="text-[11px]">Undo</span>
+                </Button>
+                <Button variant="outline" size="sm" onClick={resign} disabled={history.length === 0 || !!gameEnded} className="flex-col h-16 gap-1 border-red-500/30 bg-red-500/10 text-red-300 hover:bg-red-500/20">
+                  <Flag className="w-4 h-4" /> <span className="text-[11px]">Resign</span>
+                </Button>
+              </div>
+              <Button size="sm" onClick={() => newGame()} className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-400 hover:to-purple-500">
+                <RotateCcw className="w-4 h-4 mr-1" /> New Game
+              </Button>
+            </SectionCard>
+
             {/* Captured pieces */}
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-xl bg-white/5 border border-white/10 p-3 min-h-[64px]">
@@ -617,8 +635,8 @@ export default function PlaySection() {
               </Button>
             </SectionCard>
 
-            {/* Hint / Undo / Resign / New Game */}
-            <SectionCard label="Game Actions">
+            {/* Hint / Undo / Resign / New Game - shown here on desktop only, moved above on mobile */}
+            <SectionCard label="Game Actions" className="hidden lg:block">
               <div className="grid grid-cols-3 gap-2 mb-2">
                 <Button variant="outline" size="sm" onClick={showHint} disabled={!canHint} className="flex-col h-16 gap-1 border-sky-500/30 bg-sky-500/10 text-sky-200 hover:bg-sky-500/20">
                   <Lightbulb className="w-4 h-4" /> <span className="text-[11px]">Hint</span>
