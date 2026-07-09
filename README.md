@@ -16,7 +16,7 @@
 
 A chess platform built with Next.js and React, play against an AI opponent across seven difficulty levels, or pass-and-play locally with a friend. Built as the hero-section deliverable for a technical assessment, extended into a fuller playable experience.
 
-**Live demo:** [xl-chess-nine.vercel.app](https://xl-chess-nine.vercel.app/) 
+**Live demo:** [xl-chess-nine.vercel.app](https://xl-chess-nine.vercel.app/)                                                                                       
 **Repository:** [github.com/PriyaSharma49/XLChess](https://github.com/PriyaSharma49/XLChess)
 
 ---
